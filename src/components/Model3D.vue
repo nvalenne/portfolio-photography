@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import {Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, Mesh} from "three";
+import {
+  Scene,
+  PerspectiveCamera,
+  WebGLRenderer,
+  DirectionalLight
+} from "three";
+import {GLTF, GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import {onMounted, ref} from "vue";
 
 const props = defineProps({
@@ -26,15 +32,21 @@ onMounted(() => {
   })
   renderer.setSize( props.width, props.height)
 
-  const geometry = new BoxGeometry();
-  const material = new MeshBasicMaterial( { color: 0x00ff00 } );
-  const cube = new Mesh( geometry, material );
-  scene.add( cube );
-  camera.position.z = 5;
+  const loader = new GLTFLoader();
+  loader.load('/canon2000d.glb', (gltf : GLTF) => {
+    gltf.scene.rotateY(-Math.PI / 2)
+    scene.add(gltf.scene)
+  })
+
+  camera.position.z = 2;
+  camera.position.y = 0.5;
+  const light = new DirectionalLight(
+    0xffffff, // color
+    3, // intensity
+  );
+  scene.add( light );
   function animate() {
     requestAnimationFrame( animate );
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
     renderer.render( scene, camera );
   }
   animate()

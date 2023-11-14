@@ -3,13 +3,16 @@
   padding: 0;
 }
 
-html {
+:root {
   background: #242424;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --main-background-color: #131212;
+  --main-background-color-hover: #242424;
+  --transition-time: 0.3s;
 }
 
 /*
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
