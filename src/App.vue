@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavBar from "./components/NavBar.vue";
+
 </script>
 
 <template>
@@ -14,5 +15,9 @@ import NavBar from "./components/NavBar.vue";
 </template>
 
 <style scoped lang="scss">
-
+main {
+  position: absolute;
+  top: var(--nav-height);
+  width: 100%;
+}
 </style>

@@ -5,14 +5,16 @@ const stateMenu = ref<boolean>(false)
 function changeMenuState() {
   stateMenu.value = !stateMenu.value
   if (stateMenu.value) {
-    gsap.to("#sideMenu", {duration: 0.3, width: "20vw"})
+    gsap.to("#sideMenu", {duration: 0.3, width: "300"})
   } else {
     gsap.to("#sideMenu", {duration: 0.3, width: "0"})
   }
 }
+
 </script>
 
 <template>
+  <div>
     <nav>
       <div id="navBtn" :class="stateMenu.valueOf() ? 'menuOpened' : ''" @click="changeMenuState">
         <span class="bar1"></span>
@@ -24,48 +26,95 @@ function changeMenuState() {
       </div>
     </nav>
     <div id="sideMenu">
-        <router-link to="/">Home</router-link>
-        <router-link to="/camera_gear">My Camera Gear</router-link>
-        <router-link to="/gallery">Gallery</router-link>
+      <div class="home_btn">
+        <router-link to="/">
+          <i class="fa fa-house fa-lg"></i>
+          Back to home
+        </router-link>
+      </div>
+      <div class="option">
+        <router-link to="/camera_gear" class="gear_option">
+          <img alt="scene with camera" src="../assets/images_menu/gear_option.png" class="gear_option">
+          <span>My Camera Gear</span>
+        </router-link>
+      </div>
+      <div class="option">
+        <router-link to="/gallery" class="gallery_option">
+          <img alt="art gallery" src="../assets/images_menu/gallery_option.png" class="gallery_option">
+          <span>Gallery</span>
+        </router-link>
+      </div>
     </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
-#sideMenu {
-  background: var(--main-background-color);
-  position: fixed;
-  top: 10vh;
-  left: 0;
-  width: 0;
-  height: calc(100vh - 10vh);
-  overflow-x: hidden;
-  color: white;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
+.home_btn {
+  padding: 10px 0;
+  font-variant-caps: all-small-caps;
   a {
-    padding: 5px 10px;
-    font-size: 1.5em;
-    box-sizing: border-box;
-    cursor: pointer;
-    width: 100%;
-    line-height: 2;
-    font-variant-caps: all-small-caps;
+    font-weight: 600;
     color: white;
     text-decoration: none;
   }
-  a:hover {
-    background: var(--main-background-color-hover);
-    transition: var(--transition-time) ease-in-out;
+}
+
+#sideMenu {
+  background: var(--main-background-color);
+  position: fixed;
+  top: var(--nav-height);
+  left: 0;
+  width: 0;
+  height: calc(100vh - 10vh);
+  overflow: hidden;
+  color: white;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.4em;
+
+  .option {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 150px;
+    line-height: 2;
+    font-variant-caps: all-small-caps;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+
+    &:hover img {
+      transform: scale(1.2);
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      span {
+        position: absolute;
+        left: 0;
+        top: 5px;
+        margin-left: 10px;
+        padding: 0 10px;
+        background: var(--main-background-color);
+      }
+    }
+
+    img {
+      width: 100%;
+      transition: all 0.6s;
+    }
   }
 }
 nav {
-  position: fixed;
+  position: sticky;
   z-index: 1;
   background: var(--main-background-color);
   width: 100%;
-  height: 10vh;
+  height: var(--nav-height);
   display: flex;
   align-items: center;
   justify-content: center;
