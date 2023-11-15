@@ -5,7 +5,7 @@ const stateMenu = ref<boolean>(false)
 function changeMenuState() {
   stateMenu.value = !stateMenu.value
   if (stateMenu.value) {
-    gsap.to("#sideMenu", {duration: 0.3, width: "300"})
+    gsap.to("#sideMenu", {duration: 0.3, width: "400"})
   } else {
     gsap.to("#sideMenu", {duration: 0.3, width: "0"})
   }
@@ -28,8 +28,8 @@ function changeMenuState() {
     <div id="sideMenu">
       <div class="home_btn">
         <router-link to="/">
-          <i class="fa fa-house fa-lg"></i>
-          Back to home
+          <i class="fa fa-arrow-right-long fa-lg"></i>
+          <span>Back to home</span>
         </router-link>
       </div>
       <div class="option">
@@ -50,12 +50,22 @@ function changeMenuState() {
 
 <style scoped lang="scss">
 .home_btn {
-  padding: 10px 0;
+  padding: 10px 15px;
   font-variant-caps: all-small-caps;
+
   a {
+    &:hover i {
+      opacity: 1;
+      transform: translateX(15px);
+    }
     font-weight: 600;
     color: white;
     text-decoration: none;
+  }
+  i {
+    margin-right: 20px;
+    opacity: 0;
+    transition: 0.4s;
   }
 }
 
@@ -65,7 +75,7 @@ function changeMenuState() {
   top: var(--nav-height);
   left: 0;
   width: 0;
-  height: calc(100vh - 10vh);
+  height: 100vh;
   overflow: hidden;
   color: white;
   z-index: 1;
@@ -77,7 +87,7 @@ function changeMenuState() {
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    height: 150px;
+    height: 200px;
     line-height: 2;
     font-variant-caps: all-small-caps;
     background-size: cover;
@@ -110,7 +120,7 @@ function changeMenuState() {
   }
 }
 nav {
-  position: sticky;
+  position: fixed;
   z-index: 1;
   background: var(--main-background-color);
   width: 100%;
