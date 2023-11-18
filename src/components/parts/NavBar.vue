@@ -5,7 +5,11 @@ const stateMenu = ref<boolean>(false)
 function changeMenuState() {
   stateMenu.value = !stateMenu.value
   if (stateMenu.value) {
-    gsap.to("#sideMenu", {duration: 0.3, width: "400"})
+    if(window.innerWidth <= 425) {
+      gsap.to("#sideMenu", {duration: 0.3, width: "100%"})
+    } else {
+      gsap.to("#sideMenu", {duration: 0.3, width: "400"})
+    }
   } else {
     gsap.to("#sideMenu", {duration: 0.3, width: "0"})
   }
@@ -22,7 +26,9 @@ function changeMenuState() {
         <span class="bar3"></span>
       </div>
       <div id="logoNav">
-        <img src="../assets/vue.svg" alt="logo">
+        <router-link to="/">
+          <img alt="logo" src="/logo.svg">
+        </router-link>
       </div>
     </nav>
     <div id="sideMenu">
@@ -34,13 +40,13 @@ function changeMenuState() {
       </div>
       <div class="option">
         <router-link to="/camera_gear" class="gear_option">
-          <img alt="scene with camera" src="../assets/images_menu/gear_option.png" class="gear_option">
+          <img alt="scene with camera" src="../../assets/images_menu/gear_option.png" class="gear_option">
           <span>My Camera Gear</span>
         </router-link>
       </div>
       <div class="option">
         <router-link to="/gallery" class="gallery_option">
-          <img alt="art gallery" src="../assets/images_menu/gallery_option.png" class="gallery_option">
+          <img alt="art gallery" src="../../assets/images_menu/gallery_option.png" class="gallery_option">
           <span>Gallery</span>
         </router-link>
       </div>
@@ -49,18 +55,20 @@ function changeMenuState() {
 </template>
 
 <style scoped lang="scss">
+a {
+  text-decoration: none;
+  color: white;
+}
 .home_btn {
   padding: 10px 15px;
   font-variant-caps: all-small-caps;
 
   a {
-    &:hover i {
+    &:hover i, &:focus i {
       opacity: 1;
       transform: translateX(15px);
     }
     font-weight: 600;
-    color: white;
-    text-decoration: none;
   }
   i {
     margin-right: 20px;
@@ -95,13 +103,11 @@ function changeMenuState() {
     cursor: pointer;
     overflow: hidden;
 
-    &:hover img {
+    &:hover img, &:focus img {
       transform: scale(1.2);
     }
 
     a {
-      color: white;
-      text-decoration: none;
       font-weight: 600;
       span {
         position: absolute;
@@ -128,6 +134,13 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  #logoNav {
+    width: 50px;
+    img {
+      width: 100%;
+    }
+  }
 
   #navBtn {
     display: flex;

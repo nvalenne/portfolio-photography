@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import NavBar from "./components/NavBar.vue";
+import NavBar from "./components/parts/NavBar.vue";
 
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <header>
       <NavBar/>
     </header>
@@ -16,8 +16,7 @@ import NavBar from "./components/NavBar.vue";
 
 <style scoped lang="scss">
 main {
-  position: absolute;
-  top: var(--nav-height);
+  position: relative;
   width: 100%;
 }
 </style>
